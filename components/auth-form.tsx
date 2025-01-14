@@ -16,6 +16,7 @@ export function AuthForm({
 }) {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [isConfirmPasswordFocused, setIsConfirmPasswordFocused] = useState(false);
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
@@ -23,6 +24,14 @@ export function AuthForm({
 
   const handleConfirmPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setConfirmPassword(event.target.value);
+  };
+
+  const handleConfirmPasswordFocus = () => {
+    setIsConfirmPasswordFocused(true);
+  };
+
+  const handleConfirmPasswordBlur = () => {
+    setIsConfirmPasswordFocused(false);
   };
 
   return (
@@ -85,8 +94,10 @@ export function AuthForm({
               required
               value={confirmPassword}
               onChange={handleConfirmPasswordChange}
+              onFocus={handleConfirmPasswordFocus}
+              onBlur={handleConfirmPasswordBlur}
             />
-            {password !== confirmPassword && (
+            {isConfirmPasswordFocused && password !== confirmPassword && (
               <small className="text-red-600">Passwords do not match</small>
             )}
           </div>
