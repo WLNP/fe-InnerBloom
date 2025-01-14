@@ -6,7 +6,7 @@ export function AuthForm({
   action,
   children,
   defaultEmail = '',
-  isRegister = false, // Flag untuk register atau login
+  isRegister = false,
 }: {
   action: NonNullable<
     string | ((formData: FormData) => void | Promise<void>) | undefined
@@ -19,7 +19,6 @@ export function AuthForm({
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordMatch, setPasswordMatch] = useState(true);
 
-  // Track validation criteria
   const [passwordStrength, setPasswordStrength] = useState({
     length: false,
     uppercase: false,
@@ -27,12 +26,10 @@ export function AuthForm({
     specialChar: false,
   });
 
-  // Validasi Password
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setPassword(value);
 
-    // Validasi password
     setPasswordStrength({
       length: value.length >= 8 && value.length <= 16,
       uppercase: /[A-Z]/.test(value),
@@ -44,10 +41,9 @@ export function AuthForm({
   const handleConfirmPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setConfirmPassword(value);
-    setPasswordMatch(value === password); // Check if passwords match
+    setPasswordMatch(value === password);
   };
 
-  // Icon untuk status validasi
   const getValidationIcon = (valid: boolean) => (
     valid ? <span className="text-green-500">✔</span> : <span className="text-red-500">✘</span>
   );
@@ -93,7 +89,6 @@ export function AuthForm({
           onChange={handlePasswordChange}
         />
 
-        {/* Box status validasi yang hanya muncul jika password sudah diisi */}
         {password && (
           <div className="absolute right-0 top-0 flex flex-col gap-2 text-sm">
             <div className="flex items-center gap-2">
