@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
+import { PasswordValidation } from './ui/password-validation';
 
 export function AuthForm({
   action,
@@ -8,45 +9,21 @@ export function AuthForm({
   defaultEmail = '',
   isRegister = false,
 }: {
-  action: NonNullable<
-    string | ((formData: FormData) => void | Promise<void>) | undefined
-  >;
+  action: NonNullable<string | ((formData: FormData) => void | Promise<void>) | undefined>;
   children: React.ReactNode;
   defaultEmail?: string;
   isRegister?: boolean;
 }) {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [passwordMatch, setPasswordMatch] = useState(true);
-
-  const [passwordStrength, setPasswordStrength] = useState({
-    length: false,
-    uppercase: false,
-    number: false,
-    specialChar: false,
-  });
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setPassword(value);
-
-    setPasswordStrength({
-      length: value.length >= 8 && value.length <= 16,
-      uppercase: /[A-Z]/.test(value),
-      number: /[0-9]/.test(value),
-      specialChar: /[!@#$%^&*(),.?":{}|<>]/.test(value),
-    });
+    setPassword(event.target.value);
   };
 
   const handleConfirmPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setConfirmPassword(value);
-    setPasswordMatch(value === password);
+    setConfirmPassword(event.target.value);
   };
-
-  const getValidationIcon = (valid: boolean) => (
-    valid ? <span className="text-green-500">✔</span> : <span className="text-red-500">✘</span>
-  );
 
   return (
     <form action={action} className="flex flex-col gap-4 px-4 sm:px-16">
@@ -88,27 +65,6 @@ export function AuthForm({
           value={password}
           onChange={handlePasswordChange}
         />
-
-        {password && (
-          <div className="absolute right-0 top-0 flex flex-col gap-2 text-sm">
-            <div className="flex items-center gap-2">
-              {getValidationIcon(passwordStrength.length)}
-              <span className={passwordStrength.length ? "text-green-600" : "text-red-600"}>8-16 characters</span>
-            </div>
-            <div className="flex items-center gap-2">
-              {getValidationIcon(passwordStrength.uppercase)}
-              <span className={passwordStrength.uppercase ? "text-green-600" : "text-red-600"}>Uppercase letter</span>
-            </div>
-            <div className="flex items-center gap-2">
-              {getValidationIcon(passwordStrength.number)}
-              <span className={passwordStrength.number ? "text-green-600" : "text-red-600"}>Number</span>
-            </div>
-            <div className="flex items-center gap-2">
-              {getValidationIcon(passwordStrength.specialChar)}
-              <span className={passwordStrength.specialChar ? "text-green-600" : "text-red-600"}>Special character</span>
-            </div>
-          </div>
-        )}
       </div>
 
       {isRegister && (
@@ -130,10 +86,15 @@ export function AuthForm({
               value={confirmPassword}
               onChange={handleConfirmPasswordChange}
             />
-            {!passwordMatch && (
+            {password !== confirmPassword && (
               <small className="text-red-600">Passwords do not match</small>
             )}
           </div>
+
+          <PasswordValidation
+            password={password}
+            confirmPassword={confirmPassword}
+          />
         </>
       )}
 
