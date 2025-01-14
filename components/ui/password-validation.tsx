@@ -14,7 +14,7 @@ export const PasswordValidation: React.FC<PasswordValidationProps> = ({
     uppercase: /[A-Z]/.test(password),
     lowercase: /[a-z]/.test(password),
     number: /[0-9]/.test(password),
-    specialChar: /[!@#$%^&*()\-_+={}\[\]:;"'<>,.?/\\|`~]/.test(password),
+    specialChar: /[`~!@#$%^&*()-_=+]/.test(password),
   };
 
   const passwordMatch = password === confirmPassword;
@@ -28,7 +28,7 @@ export const PasswordValidation: React.FC<PasswordValidationProps> = ({
     { key: 'uppercase', label: 'Password must contain at least one uppercase letter (A-Z).' },
     { key: 'lowercase', label: 'Password must contain at least one lowercase letter (a-z).' },
     { key: 'number', label: 'Password must contain at least one number (0-9).' },
-    { key: 'specialChar', label: 'Password must contain at least one special character (!@#$%^&*()-_,.?":{}|<>).' },
+    { key: 'specialChar', label: 'Password must contain at least one special character (`~!@#$%^&*()-_=+)' },
   ];
 
   if (!password) return null;
