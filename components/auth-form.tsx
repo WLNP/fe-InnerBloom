@@ -103,6 +103,9 @@ export function AuthForm({
             {isConfirmPasswordFocused && password !== confirmPassword && (
               <small className="text-red-600">Passwords do not match</small>
             )}
+            {isConfirmPasswordFocused && password === confirmPassword && (
+              <small className="text-green-600">Passwords match</small>
+            )}
           </div>
 
           <PasswordValidation
