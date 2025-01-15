@@ -69,7 +69,7 @@ export function AuthForm({
           id="password"
           name="password"
           className="bg-muted text-md md:text-sm"
-          type="new-password"
+          type="password"
           required
           value={password}
           onChange={handlePasswordChange}
@@ -90,7 +90,7 @@ export function AuthForm({
               id="confirmPassword"
               name="confirmPassword"
               className="bg-muted text-md md:text-sm"
-              type="new-password"
+              type="password"
               required
               value={confirmPassword}
               onChange={handleConfirmPasswordChange}
