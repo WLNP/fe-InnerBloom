@@ -34,7 +34,7 @@ const passwordRules = [
 if (!password) return null;
 
 return (
-    <div className="gap-5 text-sm">
+    <div className="fade-in gap-5 text-sm">
     {passwordRules.map(({ key, label }) => (
         <div key={key} className="flex items-center gap-2">
         {getValidationIcon(passwordStrength[key as keyof typeof passwordStrength])}
