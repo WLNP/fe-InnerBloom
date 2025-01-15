@@ -61,7 +61,7 @@ export function AuthForm({
           name="password"
           className="bg-muted text-md md:text-sm"
           type="password"
-          autoComplete="new-password"
+          autoComplete="HTMLInputAutoCompleteAttribute"
           required
           value={password}
           onChange={handlePasswordChange}
@@ -82,6 +82,7 @@ export function AuthForm({
               name="confirmPassword"
               className="bg-muted text-md md:text-sm"
               type="password"
+              autoComplete="HTMLInputAutoCompleteAttribute"
               required
               value={confirmPassword}
               onChange={handleConfirmPasswordChange}

@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 
 interface PasswordValidationProps {
@@ -36,7 +34,7 @@ const passwordRules = [
 if (!password) return null;
 
 return (
-    <div className="fade-in gap-5 text-sm">
+    <div className="fade-in gap-5 text-sm mb-2">
     {passwordRules.map(({ key, label }) => (
         <div key={key} className="flex items-center gap-2">
         {getValidationIcon(passwordStrength[key as keyof typeof passwordStrength])}
