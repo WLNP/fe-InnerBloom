@@ -18,7 +18,6 @@ export function AuthForm({
 }) {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [isConfirmPasswordFocused, setIsConfirmPasswordFocused] = useState(false);
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
@@ -26,14 +25,6 @@ export function AuthForm({
 
   const handleConfirmPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setConfirmPassword(event.target.value);
-  };
-
-  const handleConfirmPasswordFocus = () => {
-    setIsConfirmPasswordFocused(true);
-  };
-
-  const handleConfirmPasswordBlur = () => {
-    setIsConfirmPasswordFocused(false);
   };
 
   return (
@@ -45,7 +36,6 @@ export function AuthForm({
         >
           Email Address
         </Label>
-
         <Input
           id="email"
           name="email"
@@ -66,7 +56,6 @@ export function AuthForm({
         >
           Password
         </Label>
-
         <Input
           id="password"
           name="password"
@@ -88,7 +77,6 @@ export function AuthForm({
             >
               Confirm Password
             </Label>
-
             <Input
               id="confirmPassword"
               name="confirmPassword"
@@ -97,15 +85,16 @@ export function AuthForm({
               required
               value={confirmPassword}
               onChange={handleConfirmPasswordChange}
-              onFocus={handleConfirmPasswordFocus}
-              onBlur={handleConfirmPasswordBlur}
+              aria-live="polite"
             />
-            {isConfirmPasswordFocused && password !== confirmPassword && (
-              <small className="text-red-600">Passwords do not match</small>
-            )}
-            {isConfirmPasswordFocused && password === confirmPassword && (
-              <small className="text-green-600">Passwords match</small>
-            )}
+            <small
+              className={`${
+                password === confirmPassword ? 'text-green-600' : 'text-red-600'
+              }`}
+              aria-live="polite"
+            >
+              {confirmPassword && (password === confirmPassword ? 'Passwords match' : 'Passwords do not match')}
+            </small>
           </div>
 
           <PasswordValidation
