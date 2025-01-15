@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
@@ -70,6 +72,7 @@ export function AuthForm({
           name="password"
           className="bg-muted text-md md:text-sm"
           type="password"
+          autoComplete="new-password"
           required
           value={password}
           onChange={handlePasswordChange}
