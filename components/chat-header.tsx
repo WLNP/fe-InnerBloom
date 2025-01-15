@@ -76,7 +76,7 @@ function PureChatHeader({
           target="_noblank"
         >
           <VercelIcon size={16} />
-          Deploy with Vercel
+          Contact Us!
         </Link>
       </Button>
     </header>

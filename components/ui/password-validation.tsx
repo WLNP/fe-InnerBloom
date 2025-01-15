@@ -52,3 +52,8 @@ return (
     </div>
 );
 };
+console.log(/[`~!@#$%^&*()-_=+]/.test('1')); // false
+console.log(/[`~!@#$%^&*()-_=+]/.test('2')); // false
+console.log(/[`~!@#$%^&*()-_=+]/.test('3')); // false
+console.log(/[`~!@#$%^&*()-_=+]/.test('!')); // true
+console.log(/[`~!@#$%^&*()-_=+]/.test('~')); // true
